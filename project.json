@@ -1,0 +1,14 @@
+{
+  "name": "NounsVote",
+  "tagline": "Decentralized governance interface for Nouns DAO hosted entirely on IPFS",
+  "description": "A censorship-resistant governance client for Nouns DAO that I built while learning Web3 development. Unlike traditional DAO interfaces that rely on centralized servers, NounsVote is hosted entirely on IPFS and queries blockchain data directly through user-configurable RPC endpoints. Users can browse proposals, vote on governance decisions, and submit new proposals without depending on any centralized infrastructure. The app demonstrates true Web3 principles - no servers, no single points of failure, and complete user sovereignty over data sources.",
+  "team": [
+    {
+      "name": "Smriti",
+      "email": "smriti7857@gmail.com"
+    }
+  ],
+  "demo_url": "https://bafybeihae25piv4fc6es33s2rhrtu7jc4zxgxmsb6evnpjmeab66niukwe.pinme.dev/",
+  "video_url": "https://drive.google.com/file/d/1iwPYf5dPFGpXffEPCVmmGhB8KcwWOXh1/view?usp=sharing",
+  "technologies": ["React", "Ethers.js", "IPFS", "ENS", "Tailwind CSS"]
+}
