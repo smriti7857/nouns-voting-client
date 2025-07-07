@@ -61,7 +61,7 @@ Configure your own RPC endpoints in settings. No reliance on my servers or exter
 
 ## Live Demo
 
-Deployed on IPFS: [Your deployment URL here]
+Deployed on IPFS: (https://bafybeiatzaywln5nz6b5pxyb7cik33mibudzjsc3wzwbkjki2fcdesbm74.pinme.dev/)
 
 ## What I Learned
 
