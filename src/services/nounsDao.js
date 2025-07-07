@@ -1,29 +1,24 @@
-// src/services/nounsDao.js
 import { ethers } from 'ethers';
-import { NOUNS_CONTRACTS, NOUNS_DAO_ABI, NOUNS_TOKEN_ABI, PROPOSAL_STATES } from '../constants/nouns';
+import { NOUNS_CONTRACTS, NOUNS_DAO_ABI, PROPOSAL_STATES } from '../constants/nouns';
 
 export class NounsDaoService {
   constructor(provider, signer = null) {
     this.provider = provider;
     this.signer = signer;
     
-    this.daoContract = new ethers.Contract(
+    this.contract = new ethers.Contract(
       NOUNS_CONTRACTS.NOUNS_DAO,
       NOUNS_DAO_ABI,
       signer || provider
-    );
-    
-    this.tokenContract = new ethers.Contract(
-      NOUNS_CONTRACTS.NOUNS_TOKEN,
-      NOUNS_TOKEN_ABI,
-      provider
     );
   }
 
   // Get total number of proposals
   async getProposalCount() {
     try {
-      const count = await this.daoContract.proposalCount();
+      console.log('Testing proposalCount...');
+      const count = await this.contract.proposalCount();
+      console.log('Raw count:', count);
       return count.toNumber();
     } catch (error) {
       console.error('Failed to get proposal count:', error);
@@ -35,8 +30,8 @@ export class NounsDaoService {
   async getProposal(proposalId) {
     try {
       const [proposal, state] = await Promise.all([
-        this.daoContract.proposals(proposalId),
-        this.daoContract.state(proposalId)
+        this.contract.proposals(proposalId),
+        this.contract.state(proposalId)
       ]);
       
       const currentBlock = await this.provider.getBlockNumber();
@@ -84,19 +79,13 @@ export class NounsDaoService {
   }
 
   // Cast a vote
-  async castVote(proposalId, support, reason = '') {
+  async castVote(proposalId, support) {
     if (!this.signer) {
       throw new Error('No signer available - wallet not connected');
     }
 
     try {
-      let tx;
-      if (reason) {
-        tx = await this.daoContract.castVoteWithReason(proposalId, support, reason);
-      } else {
-        tx = await this.daoContract.castVote(proposalId, support);
-      }
-      
+      const tx = await this.contract.castVote(proposalId, support);
       return tx;
     } catch (error) {
       console.error('Failed to cast vote:', error);
@@ -121,7 +110,7 @@ export class NounsDaoService {
     }
 
     try {
-      const tx = await this.daoContract.propose(
+      const tx = await this.contract.propose(
         targets,
         values, 
         signatures,
@@ -147,32 +136,11 @@ export class NounsDaoService {
   async getVotingPower(address, blockNumber = null) {
     try {
       const block = blockNumber || await this.provider.getBlockNumber();
-      const votes = await this.daoContract.getVotes(address, block);
+      const votes = await this.contract.getVotes(address, block);
       return parseFloat(ethers.utils.formatEther(votes));
     } catch (error) {
       console.error('Failed to get voting power:', error);
       return 0;
-    }
-  }
-
-  // Get Nouns owned by an address
-  async getNounsOwned(address) {
-    try {
-      const balance = await this.tokenContract.balanceOf(address);
-      const tokenIds = [];
-      
-      for (let i = 0; i < balance.toNumber(); i++) {
-        const tokenId = await this.tokenContract.tokenOfOwnerByIndex(address, i);
-        tokenIds.push(tokenId.toNumber());
-      }
-      
-      return {
-        count: balance.toNumber(),
-        tokenIds
-      };
-    } catch (error) {
-      console.error('Failed to get Nouns owned:', error);
-      return { count: 0, tokenIds: [] };
     }
   }
 
