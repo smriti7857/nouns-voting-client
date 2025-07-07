@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+Nouns Voting Client
+A decentralized governance interface for Nouns DAO. I built this while learning Web3 development to create a truly decentralized alternative to existing governance tools.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Why I Built This
+I got interested in Nouns DAO after discovering their daily auctions and governance model. When I tried participating in votes, I realized I was using a regular centralized website for "decentralized" governance. This seemed backwards, so I decided to build an alternative that's actually decentralized and can't be censored or shut down.
 
-## Available Scripts
+What It Does
+Browse proposals - View all Nouns DAO proposals with real-time vote counts and status
+Vote on proposals - Cast votes on active proposals if you own Nouns
+Create proposals - Submit new governance proposals to the DAO
+View statistics - Track governance activity and your voting history
+Configure endpoints - Set your own RPC providers for maximum control
+Everything connects directly to Ethereum mainnet through your wallet.
 
-In the project directory, you can run:
+Tech Stack
+React + Tailwind for the frontend with dark theme
+Ethers.js for blockchain interactions and smart contract calls
+Direct contract queries to Nouns DAO (since The Graph wasn't working)
+IPFS hosting for decentralized deployment
+ENS domains for censorship-resistant access
+Getting Started
+bash
+git clone https://github.com/yourusername/nouns-voting-client
+cd nouns-voting-client
+npm install
+npm start
+Connect MetaMask, switch to Ethereum mainnet, and start exploring proposals.
 
-### `npm start`
+Key Features
+Real Governance Data
+Queries proposal data directly from Nouns DAO smart contracts. This is slower than indexed APIs but ensures data accuracy and eliminates third-party dependencies.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+User-Controlled Infrastructure
+Configure your own RPC endpoints in settings. No reliance on my servers or external services - you control your data sources.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Fully Decentralized
+Hosted on IPFS across distributed nodes
+Accessible via ENS domains
+No central servers to shut down
+Open source and forkable
+Challenges I Solved
+The Graph Protocol Issues: When The Graph endpoints weren't working, I had to learn how to query smart contract data directly. This required understanding how to batch requests and optimize blockchain queries.
 
-### `npm test`
+IPFS Deployment: Traditional web apps don't work well on IPFS. I had to redesign state management to work without localStorage and handle IPFS routing properly.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Blockchain Performance: Direct contract calls are slow. I implemented request batching, caching, and smart loading strategies to improve user experience.
 
-### `npm run build`
+Web3 UX: Built comprehensive error handling for failed transactions, gas estimation, and network issues that are common in Web3 applications.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Live Demo
+Deployed on IPFS: [Your deployment URL here]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+What I Learned
+This project was my hands-on introduction to Web3 development:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+How to interact with smart contracts directly using Ethers.js
+Why blockchain queries are slow and how to optimize them
+The tradeoffs between performance and decentralization
+How IPFS hosting works and its limitations
+Web3 UX patterns for handling blockchain delays and errors
+The importance of user-controlled infrastructure
+Future Improvements
+Better mobile wallet integration
+Query performance optimizations
+Support for additional DAO governance standards
+Enhanced proposal creation interface
+Contributing
+I'm still learning Web3, so contributions and feedback are welcome. Areas where help would be useful:
 
-### `npm run eject`
+Smart contract interaction optimization
+Mobile Web3 experience improvements
+Better error handling patterns
+Additional RPC endpoint options
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Built for the Nouns community while learning about decentralized governance and Web3 development.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
